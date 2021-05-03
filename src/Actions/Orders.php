@@ -30,4 +30,15 @@ class Orders extends ActionsWithDelete
         $params = $this->serializer->toArray($order);
         return $this->preparedAdd($params);
     }
+
+   /**
+     * Получить данные по номеру заказа СДЭК e.g. 1247603110
+     * @param string $cdekNumber
+     * @return ApiResponse
+     * @throws RequestException
+     */
+    public function getByNumber(string $cdekNumber): ApiResponse
+    {
+        return $this->http_client->get(static::URL . '?cdek_number=' . $cdekNumber);
+    }
 }
